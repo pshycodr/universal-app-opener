@@ -2,6 +2,7 @@ import { generateDeepLink, openLink } from 'universal-app-opener';
 
 const urlInput = document.getElementById('urlInput') as HTMLInputElement;
 const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
+const openBtn = document.getElementById('openBtn') as HTMLButtonElement;
 const outputSection = document.getElementById('outputSection') as HTMLDivElement;
 const jsonOutput = document.getElementById('jsonOutput') as HTMLPreElement;
 const toggleDeepLinks = document.getElementById('toggleDeepLinks') as HTMLButtonElement;
@@ -43,6 +44,14 @@ generateBtn.addEventListener('click', () => {
   const result = generateDeepLink(url);
   currentResult = result;
   displayResult(result);
+  openBtn.classList.remove('hidden');
+});
+
+openBtn.addEventListener('click', () => {
+  const url = urlInput.value.trim();
+  if (url) {
+    openLink(url, { fallbackToWeb: true, fallbackDelay: 2500 });
+  }
 });
 
 toggleDeepLinks.addEventListener('click', () => {
