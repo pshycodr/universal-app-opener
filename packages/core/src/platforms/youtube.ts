@@ -38,14 +38,16 @@ function extractYouTubeVideoId(url: string): string | null {
 
 /**
  * Extract timestamp from YouTube URL (e.g., ?t=123 or &t=123s)
+ * Supports formats: 123 (seconds), 1m23s, 1h2m3s, 2m, 1h
  */
 function extractTimestamp(url: string): string | null {
-  // Match t= parameter (supports both seconds: t=123 and formatted: t=1m23s)
-  const tMatch = url.match(/[?&]t=([0-9]+[smh]?|[0-9hms]+)/);
+  // Match t= parameter with proper timestamp format validation
+  // Valid formats: plain seconds (123) or time units (1h2m3s, 1m23s, 2m, 1h, 123s)
+  const tMatch = url.match(/[?&]t=(\d+(?:h(?:\d+m)?(?:\d+s)?|m(?:\d+s)?|s)?)/);
   if (tMatch) return tMatch[1];
 
-  // Match start= parameter (alternative timestamp format)
-  const startMatch = url.match(/[?&]start=([0-9]+)/);
+  // Match start= parameter (alternative timestamp format, plain seconds only)
+  const startMatch = url.match(/[?&]start=(\d+)/);
   if (startMatch) return startMatch[1];
 
   return null;
