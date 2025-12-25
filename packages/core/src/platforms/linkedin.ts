@@ -1,5 +1,22 @@
 import { DeepLinkHandler, DeepLinkResult } from '../types'
 
+const patterns: Array<[type: string, regex: RegExp]> = [
+  // Profile
+  ['profile', /linkedin\.com\/in\/([^/?#]+)/],
+
+  // Post (posts)
+  ['post', /linkedin\.com\/posts\/([^/?#]+)/],
+
+  // Post (feed update)
+  ['post', /linkedin\.com\/feed\/update\/(?:urn:li:activity:)?([^/?#]+)/],
+
+  // Company
+  ['company', /linkedin\.com\/company\/([^/?#]+)/],
+
+  // Job
+  ['job', /linkedin\.com\/jobs\/view\/([^/?#]+)/],
+]
+
 /**
  * Match result:
  * match[0] => linkedin.com/in/{id}
@@ -8,30 +25,12 @@ import { DeepLinkHandler, DeepLinkResult } from '../types'
  */
 export const linkedinHandler: DeepLinkHandler = {
   match: (url) => {
-    const patterns: Array<[type: string, regex: RegExp]> = [
-      // Profile
-      ['profile', /linkedin\.com\/in\/([^/?#]+)/],
-
-      // Post (posts)
-      ['post', /linkedin\.com\/posts\/([^/?#]+)/],
-
-      // Post (feed update)
-      ['post', /linkedin\.com\/feed\/update\/(?:urn:li:activity:)?([^/?#]+)/],
-
-      // Company
-      ['company', /linkedin\.com\/company\/([^/?#]+)/],
-
-      // Job
-      ['job', /linkedin\.com\/jobs\/view\/([^/?#]+)/],
-    ]
-
     for (const [type, regex] of patterns) {
       const matchResult = url.match(regex)
       if (matchResult) {
         return [matchResult[0], type, matchResult[1]] as RegExpMatchArray
       }
     }
-
     return null
   },
 
