@@ -149,7 +149,7 @@ interface DeepLinkResult {
 
 - User Profiles
 
-### WhatsApp
+#### WhatsApp
 
 - Chat Links (phone number)
 - Chat Links with Pre-filled Text

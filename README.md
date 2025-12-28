@@ -79,7 +79,7 @@ Try it out: **[Live Demo](https://mdsaban.github.io/universal-app-opener/)**
 
 - User Profiles
 
-### WhatsApp
+#### WhatsApp
 
 - Chat Links (phone number)
 - Chat Links with Pre-filled Text
