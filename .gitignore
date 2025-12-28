@@ -8,4 +8,4 @@ dist
 .env.local
 *.tsbuildinfo
 *.tgz
-
+eslint.config.js
